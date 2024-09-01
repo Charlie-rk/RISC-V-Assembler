@@ -1,65 +1,51 @@
-# README.yaml
 
-name: "RISC-V Assembly to Machine Code Converter"
-description: "A C++ project that converts RISC-V assembly code into machine code. It implements multiple classes to handle different instruction formats and outputs the machine code in a human-readable format."
 
-structure:
-  files:
-    - name: "main.cpp"
-      description: "The main entry point of the program. It reads the assembly instructions from a file and writes the corresponding machine code to an output file."
-    - name: "OperationTypes.h"
-      description: "Header file containing mappings for different instruction types like R, I, S, SB, U, UJ. It also contains the mappings for funct3, funct7, and opcode."
-    - name: "Opcode.h"
-      description: "Header file defining the opcodes for different RISC-V operations."
+# "RISC-V Assembly to Machine Code Converter"
+ "A C++ project that converts RISC-V assembly code into machine code. It implements multiple classes to handle different instruction formats and outputs the machine code in a human-readable format."
+ ## Project structure
+ 
+```sh
+.
+├── main.cpp
+│   ├── ASSEMBLER
+│   │   ├── decimal_To_Binary(int reg)
+│   │   ├── binary_extend(string &bin, int to_value)
+│   │   ├── get_Operation(string &line)
+│   │   ├── get_type(string &operation)
+│   │   ├── get_register(string &line)
+│   │   ├── get_Opcode(string &operation)
+│   │   ├── get_func3(string &operation)
+│   │   ├── get_funct7(string &operation)
+│   │   └── get_immediate_addi(string &line, bool addi)
+│   ├── ASSEMBELY_TO_MACHINE
+│   │   ├── print_R_type(string &machine_Code)
+│   │   ├── print_SB_type(const string &machine_Code)
+│   │   ├── print_I_type(const string &machine_Code)
+│   │   ├── print_S_type(const string &machine_Code)
+│   │   ├── print_U_type(const string &machine_Code)
+│   │   ├── print_UJ_type(const string &machine_Code)
+│   │   └── get_Machine_Code(string &line)
+│   ├── R_type_addresing_Instr(string &line, string &operation)
+│   ├── I_type_addresing_Instr(string &line, string &operation)
+│   ├── S_type_addresing_Instr(string &line, string &operation)
+│   ├── SB_type_addresing_Instr(string &line, string &operation)
+│   ├── UJ_type_addresing_Instr(string &line, string &operation)
+│   ├── U_type_addresing_Instr(string &line, string &operation)
+│   └── read_assembly_write_machine(const string &filename, ofstream &outFile)
+├── OperationTypes.h
+│   └── (Content not detailed here)
+├── Opcode.h
+│   └── (Content not detailed here)
+└── assembly.txt
+    └── (Assembly code to be converted)
 
-  classes:
-    - name: "ASSEMBLER"
-      description: "Class responsible for converting parts of the assembly instruction into binary format and extracting different components like operation type, registers, immediate values, etc."
-      methods:
-        - name: "decimal_To_Binary"
-          description: "Converts a decimal value to its binary representation."
-        - name: "binary_extend"
-          description: "Extends a binary string to a specified length by padding it with leading zeros."
-        - name: "get_Operation"
-          description: "Extracts the operation mnemonic (e.g., add, sub) from an assembly instruction."
-        - name: "get_type"
-          description: "Returns the type of the operation (R, I, S, SB, U, UJ)."
-        - name: "get_register"
-          description: "Extracts the register numbers from an assembly instruction."
-        - name: "get_Opcode"
-          description: "Returns the opcode for a given operation."
-        - name: "get_func3"
-          description: "Returns the funct3 value for a given operation."
-        - name: "get_funct7"
-          description: "Returns the funct7 value for a given operation."
-        - name: "get_immediate_addi"
-          description: "Extracts the immediate value from an assembly instruction, specifically for 'addi' and similar instructions."
+```
+## References
+![image](https://github.com/user-attachments/assets/4b2e1718-8c3b-4938-92f4-4beb0f07cff4)
+## 
+![image](https://github.com/user-attachments/assets/29b2b447-066d-400e-8a18-8fb7c75715e7)
+##
+![image](https://github.com/user-attachments/assets/c0111ebc-d057-4924-b1fc-4a6ba4dc573a)
 
-    - name: "ASSEMBELY_TO_MACHINE"
-      description: "Class responsible for generating the final machine code and printing it in a human-readable format. Handles different instruction types such as R, I, S, SB, U, UJ."
-      methods:
-        - name: "print_R_type"
-          description: "Prints the R-type instruction in a human-readable format with fields like funct7, rs2, rs1, funct3, rd, and opcode."
-        - name: "print_I_type"
-          description: "Prints the I-type instruction in a human-readable format with fields like imm[11:0], rs1, funct3, rd, and opcode."
-        - name: "print_S_type"
-          description: "Prints the S-type instruction in a human-readable format with fields like imm[11:5], rs2, rs1, funct3, imm[4:0], and opcode."
-        - name: "print_SB_type"
-          description: "Prints the SB-type instruction in a human-readable format with fields like imm[12], imm[10:5], rs2, rs1, funct3, imm[4:1], imm[11], and opcode."
-        - name: "print_U_type"
-          description: "Prints the U-type instruction in a human-readable format with fields like imm[31:12], rd, and opcode."
-        - name: "print_UJ_type"
-          description: "Prints the UJ-type instruction in a human-readable format with fields like imm[20], imm[10:1], imm[11], imm[19:12], rd, and opcode."
-        - name: "get_Machine_Code"
-          description: "Determines the type of the instruction and generates the corresponding machine code, then prints it in a human-readable format."
 
-  usage:
-    - name: "read_assembly_write_machine"
-      description: "Reads the assembly code from a file, converts it to machine code using ASSEMBELY_TO_MACHINE, and writes the machine code to an output file."
-
-  execution:
-    steps:
-      - "Ensure the assembly instructions are written in 'assembly.txt'."
-      - "Compile the program using a C++ compiler."
-      - "Run the program; it will generate a 'machine.txt' file with the corresponding machine code."
 
